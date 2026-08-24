@@ -24,7 +24,7 @@ if menu == "Hide Secret Message (Encode)":
         
     with col2:
         if uploaded_file is not None:
-            st.image(uploaded_file, caption="Original Uploaded Image", use_column_width=True)
+            st.image(uploaded_file, caption="Original Uploaded Image", use_container_width=True)
 
     if st.button("🚀 Encrypt & Hide Message"):
         if uploaded_file is not None and secret_text and cipher_key:
@@ -33,25 +33,23 @@ if menu == "Hide Secret Message (Encode)":
             try:
                 stego_image_bytes = hide_data(image_bytes, encrypted_msg)
                 
-                # Streamlit Native Effect (Balloons)
                 st.balloons()
                 st.success("✨ Message successfully encrypted and hidden in the image!")
                 
                 st.markdown("---")
                 st.subheader("📊 Visual Comparison & Analysis")
                 
-                # Side-by-Side Image Comparison Layout
                 comp_col1, comp_col2, comp_col3 = st.columns(3)
                 
                 with comp_col1:
-                    st.image(uploaded_file, caption="1. Original Image", use_column_width=True)
+                    st.image(uploaded_file, caption="1. Original Image", use_container_width=True)
                 
                 with comp_col2:
-                    st.image(stego_image_bytes, caption="2. Stego Image (With Hidden Data)", use_column_width=True)
+                    st.image(stego_image_bytes, caption="2. Stego Image (With Hidden Data)", use_container_width=True)
                 
                 with comp_col3:
                     diff_img = get_difference_map(image_bytes, stego_image_bytes)
-                    st.image(diff_img, caption="3. Visual Residual / Difference Map", use_column_width=True)
+                    st.image(diff_img, caption="3. Visual Residual / Difference Map", use_container_width=True)
                 
                 st.info("💡 Note: The Residual Map highlights the modified pixel bits where the secret payload is embedded.")
 
@@ -77,7 +75,7 @@ elif menu == "Extract Secret Message (Decode)":
         
     with col_ext2:
         if uploaded_file is not None:
-            st.image(uploaded_file, caption="Uploaded Stego Image", use_column_width=True)
+            st.image(uploaded_file, caption="Uploaded Stego Image", use_container_width=True)
             
     if st.button("🔓 Extract & Decrypt Message"):
         if uploaded_file is not None and cipher_key:
